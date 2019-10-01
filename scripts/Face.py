@@ -54,7 +54,7 @@ import rospy
 class Face:
 
     def __init__(self):
-        self.robot_gender = rospy.get_param("/robot_gender")
+        self.robot_gender = rospy.get_param("/gender")
 
         # determine the path and set the default path place
         os.chdir(r'/home/{}/pal/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
@@ -219,7 +219,7 @@ class Face:
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
         self.skin.setSkin(2)
         mouthIndex = 4#random.choice(mouthArray)
-        eyebrowIndex = random.choice(eyeBrowArray)
+        eyebrowIndex = 0#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_neutral(self, cv2, publish):
@@ -253,7 +253,7 @@ class Face:
         eyeBrowArray = [4]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
         self.skin.setSkin(1)
-        mouthIndex = random.choice(mouthArray)
+        mouthIndex = 3#random.choice(mouthArray)
         eyebrowIndex = random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 

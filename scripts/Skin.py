@@ -13,7 +13,7 @@ class Skin:
     indexOfSkin = 5 # choosen element of the array
 
     def __init__(self, initSkin):
-        self.robot_gender = rospy.get_param("/robot_gender")
+        self.robot_gender = rospy.get_param("/gender")
 
         # This array keeps the diffirent colour version of skin
         self.skins = [

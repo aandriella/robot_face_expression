@@ -13,7 +13,7 @@ class Eyebrow:
     indexOfEyebrow = 0  # choosen element of the array
 
     def __init__(self, initEyebrow):
-        self.robot_gender = rospy.get_param("/robot_gender")
+        self.robot_gender = rospy.get_param("/gender")
         # This array keeps the diffirent shape of eyebrow
         self.eyebrows = [
             Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_0.png"),

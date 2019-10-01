@@ -12,7 +12,7 @@ import rospy
 class Eye:
     
     def __init__(self):
-        self.robot_gender = rospy.get_param("/robot_gender")
+        self.robot_gender = rospy.get_param("/gender")
         self.eyes = Image.open("data/"+self.robot_gender+"/baxter_eye.png")   # eye image
         self.positionX = 0  # keeps the x position as a coordinate
         self.positionY = 0  # keeps the y position as a coordinate
