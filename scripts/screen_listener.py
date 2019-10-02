@@ -428,7 +428,8 @@ def main():
     print "entered main part..."
 #    wobbler = head_wobbler.Wobbler()
     #face.testAllImages(cv2, publish_image)
-    face.sleep(cv2, publish_image)
+    face.emotion_neutral(cv2, publish_image)
+    #face.sleep(cv2, publish_image)
 #    rospy.Subscriber('/robot/sonar/head_sonar/state', PointCloud, callback_human_follow)
 #    rospy.Subscriber('/robot/limb/left/endpoint_state', EndpointState, callback_left_arm_follow)
 #    rospy.Subscriber('/robot/limb/right/endpoint_state', EndpointState, callback_right_arm_follow)

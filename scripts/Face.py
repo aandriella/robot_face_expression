@@ -226,7 +226,7 @@ class Face:
         eyeBrowArray = [0, 1]
         self.winkMove(cv2, -330, 0.3, publish)  # Eyelids are not seen.
         self.skin.setSkin(2)
-        mouthIndex = 6  # random.choice(mouthArray)
+        mouthIndex = 5  # random.choice(mouthArray)
         eyebrowIndex = random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
