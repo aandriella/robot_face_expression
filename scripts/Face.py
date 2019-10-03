@@ -57,7 +57,7 @@ class Face:
         self.robot_gender = rospy.get_param("/gender")
 
         # determine the path and set the default path place
-        os.chdir(r'/home/{}/pal/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
+        os.chdir(r'/home/{}/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
         ''' Parts of the face of baxter are defined.'''
         self.backgroundImage = Image.open("data/"+self.robot_gender+"/baxter_background.png") # Background behind the eyes
         # Face partions objects
