@@ -57,7 +57,7 @@ class Face:
         self.robot_gender = rospy.get_param("/gender")
 
         # determine the path and set the default path place
-        os.chdir(r'/home/{}/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
+        os.chdir(r'/home/{}/pal/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
         ''' Parts of the face of baxter are defined.'''
         self.backgroundImage = Image.open("data/"+self.robot_gender+"/baxter_background.png") # Background behind the eyes
         # Face partions objects
@@ -77,7 +77,7 @@ class Face:
         faceImage.paste(self.eye.getEyes(), (int(self.eye.getPositionX()), int(self.eye.getPositionY())), self.eye.getEyes())
         faceImage.paste(self.eyelid.getEyelid(), (0, self.eyelid.getPosition()), self.eyelid.getEyelid())
         faceImage.paste(self.skin.getSkin(), (0, 0), self.skin.getSkin())
-        faceImage.paste(self.mouth.getMouth(), (0, 0), self.mouth.getMouth())
+        #faceImage.paste(self.mouth.getMouth(), (0, 0), self.mouth.getMouth())
         faceImage.paste(self.eyebrow.getEyebrow(), (0, 0), self.eyebrow.getEyebrow())
         image = array(faceImage)
         return image
@@ -194,7 +194,7 @@ class Face:
     # Emotions
 
     def showEmotion(self, mouthIndex, eyebrowIndex, cv2, publish):
-        self.mouth.setMouth(mouthIndex)
+        #self.mouth.setMouth(mouthIndex)
         self.eyebrow.setEyebrow(eyebrowIndex)
         self.show(publish)
 
