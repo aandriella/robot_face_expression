@@ -16,11 +16,11 @@ class Eyebrow:
         self.robot_gender = rospy.get_param("/gender")
         # This array keeps the diffirent shape of eyebrow
         self.eyebrows = [
-            Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_0.png"),
-            Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_1.png"),
-            Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_2.png"),
-            Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_3.png"),
-            Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_4.png")
+            Image.open("test/eye_brow_happy.png"),
+            Image.open("test/eye_brow_sad.png"),
+            Image.open("test/eye_brow_angry.png"),
+            #Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_3.png"),
+            #Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_4.png")
         ]
 
         self.indexOfEyebrow = initEyebrow
@@ -32,4 +32,5 @@ class Eyebrow:
         self.indexOfEyebrow = eyebrow
 
     def getEyebrow(self):
+        print "index eyebrow ",self.indexOfEyebrow
         return self.eyebrows[self.indexOfEyebrow]
