@@ -17,12 +17,13 @@ class Skin:
 
         # This array keeps the diffirent colour version of skin
         self.skins = [
-            Image.open("data/"+self.robot_gender+"/skin/baxter_skin_0_1.png"),
-            Image.open("data/"+self.robot_gender+"/skin/baxter_skin_0_1.png"),
-            Image.open("data/"+self.robot_gender+"/skin/baxter_skin_0_1.png"),
-            Image.open("data/"+self.robot_gender+"/skin/baxter_skin_3.png"),
-            Image.open("data/"+self.robot_gender+"/skin/baxter_skin_4.png"),
-            Image.open("data/"+self.robot_gender+"/skin/baxter_skin_5.png")
+            Image.open("test/skin.png"),
+            Image.open("test/skin.png"),
+            Image.open("test/skin.png"),
+            Image.open("test/skin.png"),
+            Image.open("test/skin.png"),
+            Image.open("test/skin.png")
+
         ]
 
 

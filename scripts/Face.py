@@ -63,7 +63,7 @@ class Face:
         # Face partions objects
         self.skin = Skin.Skin(5) # range: [0, 5]
         self.mouth = Mouth.Mouth(2) # range: [0, 6]
-        self.eyebrow = Eyebrow.Eyebrow(1) # range: [0, 3]
+        self.eyebrow = Eyebrow.Eyebrow(2) # range: [0, 3]
         self.eye = Eye.Eye()
         self.eyelid = Eyelid.Eyelid()
         self.eyelid.setPosition(-330)
@@ -227,7 +227,7 @@ class Face:
         self.winkMove(cv2, -330, 0.3, publish)  # Eyelids are not seen.
         self.skin.setSkin(2)
         mouthIndex = 5  # random.choice(mouthArray)
-        eyebrowIndex = random.choice(eyeBrowArray)
+        eyebrowIndex = 0#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_angry(self, cv2, publish):
@@ -236,7 +236,7 @@ class Face:
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
         self.skin.setSkin(4)
         mouthIndex = random.choice(mouthArray)
-        eyebrowIndex = random.choice(eyeBrowArray)
+        eyebrowIndex = 2#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_confused(self, cv2, publish):
@@ -253,8 +253,8 @@ class Face:
         eyeBrowArray = [4]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
         self.skin.setSkin(1)
-        mouthIndex = 3#random.choice(mouthArray)
-        eyebrowIndex = random.choice(eyeBrowArray)
+        mouthIndex = 1#random.choice(mouthArray)
+        eyebrowIndex = 1#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_panic(self, cv2, publish):
