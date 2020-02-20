@@ -151,7 +151,7 @@ def callback_Command(data):
         if msgs[0] == "happy" :
             face.emotion_happy(cv2, publish_image)
             print "Emotion happy is applicated"
-            
+
         elif msgs[0] == "angry" :
             face.emotion_angry(cv2, publish_image)
             print "Emotion angry is applicated"
@@ -225,7 +225,7 @@ def callback_Command(data):
         if msgs[0] == "look" :
             x = int(msgs[1])
             y = int(msgs[2])
-            face.lookWithMotion(cv2, x, y, 0.5, publish_image)
+            face.lookWithMotion(cv2, x, y, 0.8, publish_image)
 
         elif msgs[0] == "human" and msgs[1] == "follow" and msgs[2] == "on" :
             face.lookWithMotion(cv2, 0, 0, 0.5, publish_image)

@@ -11,7 +11,6 @@ import rospy
 class Eyelid:
 
     def __init__(self):
-        self.robot_gender = rospy.get_param("/gender")
         self.eyelid = Image.open("test/eyelid.png") # eyelid image
         self.position = 0 # y position, we don't need x position because of vertical movment.
 

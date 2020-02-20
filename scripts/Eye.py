@@ -11,9 +11,8 @@ import rospy
 
 class Eye:
     
-    def __init__(self):
-        self.robot_gender = rospy.get_param("/gender")
-        self.eyes = Image.open("test/pupil.png")   # eye image
+    def __init__(self, file):
+        self.eyes = Image.open(file)   # eye image
         self.positionX = 0  # keeps the x position as a coordinate
         self.positionY = 0  # keeps the y position as a coordinate
 

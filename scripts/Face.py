@@ -54,17 +54,16 @@ import rospy
 class Face:
 
     def __init__(self):
-        self.robot_gender = rospy.get_param("/gender")
 
         # determine the path and set the default path place
         os.chdir(r'/home/{}/pal/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
         ''' Parts of the face of baxter are defined.'''
-        self.backgroundImage = Image.open("data/"+self.robot_gender+"/baxter_background.png") # Background behind the eyes
+        self.backgroundImage = Image.open("data/baxter_background.png") # Background behind the eyes
         # Face partions objects
+        self.eye = Eye.Eye("test/pupil.png")
         self.skin = Skin.Skin(5) # range: [0, 5]
         self.mouth = Mouth.Mouth(2) # range: [0, 6]
         self.eyebrow = Eyebrow.Eyebrow(2) # range: [0, 3]
-        self.eye = Eye.Eye()
         self.eyelid = Eyelid.Eyelid()
         self.eyelid.setPosition(-330)
         self.eyesCoordinateX = self.eye.getPositionX()
@@ -72,6 +71,7 @@ class Face:
     # buildFace function is combining the all face parts together.
 
     def buildFace(self):
+        #self.eye = Eye.Eye("test/pupil.png")
         # Merging the layers
         faceImage = self.backgroundImage.copy()
         faceImage.paste(self.eye.getEyes(), (int(self.eye.getPositionX()), int(self.eye.getPositionY())), self.eye.getEyes())
@@ -82,9 +82,23 @@ class Face:
         image = array(faceImage)
         return image
 
+    # def buildFaceHappy(self):
+    #     self.eye = Eye.Eye("test/pupil_happy.png")
+    #     # Merging the layers
+    #     faceImage = self.backgroundImage.copy()
+    #     faceImage.paste(self.eye.getEyes(), (int(self.eye.getPositionX()), int(self.eye.getPositionY())), self.eye.getEyes())
+    #     faceImage.paste(self.eyelid.getEyelid(), (0, self.eyelid.getPosition()), self.eyelid.getEyelid())
+    #     faceImage.paste(self.skin.getSkin(), (0, 0), self.skin.getSkin())
+    #     #faceImage.paste(self.mouth.getMouth(), (0, 0), self.mouth.getMouth())
+    #     faceImage.paste(self.eyebrow.getEyebrow(), (0, 0), self.eyebrow.getEyebrow())
+    #     image = array(faceImage)
+    #     return image
     def show(self, publish):
         image = self.buildFace()
         publish(image)
+    #def show_happy(self, publish):
+    #     image = self.buildFaceHappy()
+    #     publish(image)
 
     # Reposition of the eyes of the baxter
     # This function provide with the eyes' simulation movement
@@ -111,7 +125,7 @@ class Face:
 
     def lookWithMotionDynamic(self, cv2, destinationX, destinationY, time, publish, wobbler):
         # if it is not initilized don't applicate the function
-        if wobbler != None: 
+        if wobbler != None:
             # taking head position as a coordinate
             headPositionRadian = wobbler.getPosition()
             headPositionCoordinate = self.radianToCoordinate(headPositionRadian)
@@ -130,7 +144,7 @@ class Face:
 
     def lookExactCoordinateDynamic(self, destinationX, destinationY, publish, wobbler):
         # Looking the given coordinate according to the position of the head.
-        if wobbler != None: 
+        if wobbler != None:
             # taking head position as a coordinate
             headPositionRadian = wobbler.getPosition()
             headPositionCoordinate = self.radianToCoordinate(headPositionRadian)
@@ -139,7 +153,7 @@ class Face:
                 # wobbling -> look at the given coordinates physicly
                 print "Wobbling to: ", destinationX
                 wobbler.wobble(self.coordinateToRadian(destinationX))
-                self.eye.lookExactCoordinate(0, destinationY)  
+                self.eye.lookExactCoordinate(0, destinationY)
             else:
                 # Normal looking with eyes with an animation
                 destinationX = destinationX - headPositionCoordinate
@@ -153,6 +167,7 @@ class Face:
     """
 
     def winkMove(self, cv2, destinationPosition, time, publish):
+
         # Animation initial values
         startTime = timeit.default_timer()
         currentTime = timeit.default_timer()
@@ -219,7 +234,7 @@ class Face:
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
         self.skin.setSkin(2)
         mouthIndex = 4#random.choice(mouthArray)
-        eyebrowIndex = 0#random.choice(eyeBrowArray)
+        eyebrowIndex = 1#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_neutral(self, cv2, publish):
@@ -236,7 +251,7 @@ class Face:
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
         self.skin.setSkin(4)
         mouthIndex = random.choice(mouthArray)
-        eyebrowIndex = 2#random.choice(eyeBrowArray)
+        eyebrowIndex = 4#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_confused(self, cv2, publish):
@@ -245,7 +260,7 @@ class Face:
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
         self.skin.setSkin(3)
         mouthIndex = random.choice(mouthArray)
-        eyebrowIndex = random.choice(eyeBrowArray)
+        eyebrowIndex = 3
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_sad(self, cv2, publish):
@@ -254,7 +269,7 @@ class Face:
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
         self.skin.setSkin(1)
         mouthIndex = 1#random.choice(mouthArray)
-        eyebrowIndex = 1#random.choice(eyeBrowArray)
+        eyebrowIndex = 2#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_panic(self, cv2, publish):
@@ -284,16 +299,6 @@ class Face:
         eyebrowIndex = random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
-    def testAllImages(self, cv2, publish):
-        for index in range(6):
-            self.skin.setSkin(index)
-            self.show(publish)
-        for index in range(7):
-            self.showEmotion(index, 0, cv2, publish)
-            time.sleep(0.1)
-        for index in range(5):
-            self.showEmotion(1, index, cv2, publish)
-            time.sleep(0.1)
 
 
     """ Head Joint move calculations """
