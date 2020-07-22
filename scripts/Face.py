@@ -56,9 +56,9 @@ class Face:
     def __init__(self):
 
         # determine the path and set the default path place
-        os.chdir(r'/home/{}/pal/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
+        os.chdir(r'/home/pal/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
         ''' Parts of the face of baxter are defined.'''
-        self.backgroundImage = Image.open("data/baxter_background.png") # Background behind the eyes
+        self.backgroundImage = Image.open("test/background.png") # Background behind the eyes
         # Face partions objects
         self.eye = Eye.Eye("test/pupil.png")
         self.skin = Skin.Skin(5) # range: [0, 5]
