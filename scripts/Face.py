@@ -1,47 +1,43 @@
 #!/usr/bin/env python
 
 '''
-@Author: Bilgehan NAL
-This file has a class which defines the face of baxter
+@Author: Antonio Andriella
+This file has a class which defines the face of Tiago
 Face class has other part of the face objects.
+Credits to Bilgehan NAL
 '''
 
 '''
-Baxter Face Descriptions:
+Tiago Face Descriptions:
 
 Skin, Mouth and Eyebrow has multiple shapes.
-Skin has 5 -> [0, 5]
-Mouth has 7 -> [0, 6]
-Eyebrow has 5 -> [0, 4]
+Skin has 1 -> [0] (So far we are not interested to change the skin color of the robot)
+Mouth has 7 -> [0, 6] (Not used it in the current version)
+Eyebrow has 5 -> [0, 4] (neutral, happy, sad, confused, angry)
 
-Skin :: 1->5 : yellow skin -> red skin
-        -> 6 is sleeping skin
 Mouth ::
-    0 -> angry mouth
-    1 -> boring mouth
-    2 -> confused mouth
-    3 -> sad mouth
-    4 -> smiling tooth mouth
-    5 -> smiling mouth
-    6 -> smiling open mouth
+    0 -> neutral mouth
+    1 -> happy mouth
+    2 -> sad mouth
+    3 -> confused mouth
+    4 -> angry mouth
 Eyebrow ::
-    0 -> normal eyebrow
-    1 -> ( ): eyebrow
-    2 -> One eyebrow in the high
-    3 -> angry eyebrow
-    4 -> Kucuk Emrah Eyebrow
-
+    0 -> neutral mouth
+    1 -> happy mouth
+    2 -> sad mouth
+    3 -> confused mouth
+    4 -> angry mouth
+    
 Coordinate range for x: [-80, 80]
 Coordinate range for y: [-120, 120]
 
 '''
 
 from PIL import Image
-import Skin
-import Mouth
 import Eyebrow
 import Eye
 import Eyelid
+import Skin
 from numpy import array
 import timeit
 import cv2
@@ -51,20 +47,22 @@ import getpass
 import time
 import rospy
 
+path = os.path.abspath(__file__)
+dir_path = os.path.dirname(path)
+parent_dir_of_file = os.path.dirname(dir_path)
+print(parent_dir_of_file)
 class Face:
 
     def __init__(self):
 
-        # determine the path and set the default path place
-        os.chdir(r'/home/pal/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
-        ''' Parts of the face of baxter are defined.'''
-        self.backgroundImage = Image.open("test/background.png") # Background behind the eyes
+        ''' Parts of the face of Tiago are defined.'''
+        self.face_builder_path = parent_dir_of_file+"/face_builder/"
+        self.backgroundImage = Image.open(self.face_builder_path+"background.png") # Background behind the eyes
         # Face partions objects
-        self.eye = Eye.Eye("test/pupil.png")
-        self.skin = Skin.Skin(5) # range: [0, 5]
-        self.mouth = Mouth.Mouth(2) # range: [0, 6]
-        self.eyebrow = Eyebrow.Eyebrow(2) # range: [0, 3]
-        self.eyelid = Eyelid.Eyelid()
+        self.skin = Skin.Skin(self.face_builder_path, 0)
+        self.eye = Eye.Eye(self.face_builder_path)
+        self.eyebrow = Eyebrow.Eyebrow(self.face_builder_path, 4)
+        self.eyelid = Eyelid.Eyelid(self.face_builder_path)
         self.eyelid.setPosition(-330)
         self.eyesCoordinateX = self.eye.getPositionX()
         self.angleOfView = 0.25
@@ -82,23 +80,9 @@ class Face:
         image = array(faceImage)
         return image
 
-    # def buildFaceHappy(self):
-    #     self.eye = Eye.Eye("test/pupil_happy.png")
-    #     # Merging the layers
-    #     faceImage = self.backgroundImage.copy()
-    #     faceImage.paste(self.eye.getEyes(), (int(self.eye.getPositionX()), int(self.eye.getPositionY())), self.eye.getEyes())
-    #     faceImage.paste(self.eyelid.getEyelid(), (0, self.eyelid.getPosition()), self.eyelid.getEyelid())
-    #     faceImage.paste(self.skin.getSkin(), (0, 0), self.skin.getSkin())
-    #     #faceImage.paste(self.mouth.getMouth(), (0, 0), self.mouth.getMouth())
-    #     faceImage.paste(self.eyebrow.getEyebrow(), (0, 0), self.eyebrow.getEyebrow())
-    #     image = array(faceImage)
-    #     return image
     def show(self, publish):
         image = self.buildFace()
         publish(image)
-    #def show_happy(self, publish):
-    #     image = self.buildFaceHappy()
-    #     publish(image)
 
     # Reposition of the eyes of the baxter
     # This function provide with the eyes' simulation movement
@@ -215,24 +199,24 @@ class Face:
 
     def sleep(self, cv2, publish):
        self.winkMove(cv2, 0, 0.6, publish) # Eyelids are not seen.
-       self.skin.setSkin(5) # range: [0, 5]
+       self.skin.setSkin(0) # range: [0, 5]
        self.showEmotion(1, 1, cv2, publish)
 
     def wakeUp(self, cv2, publish):
         self.winkMove(cv2, -330, 0.8, publish) # Eyelids are not seen.
-        self.skin.setSkin(3) # range: [0, 5]
+        self.skin.setSkin(0) # range: [0, 5]
         self.showEmotion(5, 0, cv2, publish)
 
     def emotion_default(self, cv2, publish):
        self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
-       self.skin.setSkin(2)
+       self.skin.setSkin(0)
        self.showEmotion(5, 0, cv2, publish)
     
     def emotion_happy(self, cv2, publish):
         mouthArray = [4, 6]
         eyeBrowArray = [0, 1]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
-        self.skin.setSkin(2)
+        self.skin.setSkin(0)
         mouthIndex = 4#random.choice(mouthArray)
         eyebrowIndex = 1#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
@@ -240,7 +224,7 @@ class Face:
     def emotion_neutral(self, cv2, publish):
         eyeBrowArray = [0, 1]
         self.winkMove(cv2, -330, 0.3, publish)  # Eyelids are not seen.
-        self.skin.setSkin(2)
+        self.skin.setSkin(0)
         mouthIndex = 5  # random.choice(mouthArray)
         eyebrowIndex = 0#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
@@ -249,7 +233,7 @@ class Face:
         mouthArray = [0, 3]
         eyeBrowArray = [2, 3]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
-        self.skin.setSkin(4)
+        self.skin.setSkin(0)
         mouthIndex = random.choice(mouthArray)
         eyebrowIndex = 4#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
@@ -258,7 +242,7 @@ class Face:
         mouthArray = [2]
         eyeBrowArray = [0, 1]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
-        self.skin.setSkin(3)
+        self.skin.setSkin(0)
         mouthIndex = random.choice(mouthArray)
         eyebrowIndex = 3
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
@@ -267,7 +251,7 @@ class Face:
         mouthArray = [1, 3]
         eyeBrowArray = [4]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
-        self.skin.setSkin(1)
+        self.skin.setSkin(0)
         mouthIndex = 1#random.choice(mouthArray)
         eyebrowIndex = 2#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
@@ -285,7 +269,7 @@ class Face:
         mouthArray = [1]
         eyeBrowArray = [0, 2, 3]
         self.winkMove(cv2, -150, 0.3, publish) # Eyelids are in the middle of the eyes.
-        self.skin.setSkin(2)
+        self.skin.setSkin(0)
         mouthIndex = random.choice(mouthArray)
         eyebrowIndex = 2#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
@@ -294,7 +278,7 @@ class Face:
         mouthArray = [4, 6]
         eyeBrowArray = [2, 3]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
-        self.skin.setSkin(3)
+        self.skin.setSkin(0)
         mouthIndex = 4#random.choice(mouthArray)
         eyebrowIndex = random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)

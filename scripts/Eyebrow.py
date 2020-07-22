@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 """
-@Author: Bilgehan NAL
-This file has a class which defines the mouth of the baxter's face.
+@Author: Antonio Andriella
+This file has a class which defines the eyebrow of the Tiago's face.
+Credits to Bilgehan NAL
 """
 
 from PIL import Image
@@ -12,16 +13,14 @@ class Eyebrow:
 
     indexOfEyebrow = 0  # choosen element of the array
 
-    def __init__(self, initEyebrow):
+    def __init__(self, folder_path, initEyebrow):
         # This array keeps the diffirent shape of eyebrow
         self.eyebrows = [
-            Image.open("test/eye_brow_neutral.png"),
-            Image.open("test/eye_brow_happy.png"),
-            Image.open("test/eye_brow_sad.png"),
-            Image.open("test/eye_brow_confused.png"),
-            Image.open("test/eye_brow_angry.png")
-            #Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_3.png"),
-            #Image.open("data/"+self.robot_gender+"/eyebrow/baxter_eyebrow_4.png")
+            Image.open(folder_path+"eye_brow_neutral.png"),
+            Image.open(folder_path+"eye_brow_happy.png"),
+            Image.open(folder_path+"eye_brow_sad.png"),
+            Image.open(folder_path+"eye_brow_confused.png"),
+            Image.open(folder_path+"eye_brow_angry.png")
         ]
 
         self.indexOfEyebrow = initEyebrow

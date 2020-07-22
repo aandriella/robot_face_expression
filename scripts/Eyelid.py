@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 '''
-@Author: Bilgehan NAL
-This file has class which defines the eyelid of the baxter
+@Author: Antonio Andriella
+This file has class which defines the eyelid of the Tiago robot
+Credits to Bilgehan NAL
 '''
 
 from PIL import Image
@@ -10,8 +11,8 @@ import rospy
 
 class Eyelid:
 
-    def __init__(self):
-        self.eyelid = Image.open("test/eyelid.png") # eyelid image
+    def __init__(self, folder_path):
+        self.eyelid = Image.open(folder_path+"eyelid.png") # eyelid image
         self.position = 0 # y position, we don't need x position because of vertical movment.
 
     def moveCalculation(self, position, destinationPosition, totalTime, instantTime):
