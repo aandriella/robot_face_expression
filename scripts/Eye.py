@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 '''
-@Author: Bilgehan NAL
-This file has a class which defines the shape and movment of the baxter's eyes.
+@Author: Antonio Andriella
+This file has a class which defines the shape and movement of the Tiago's eyes.
+Credits to Bilgehan NAL
 '''
 
 from PIL import Image
@@ -11,8 +12,9 @@ import rospy
 
 class Eye:
     
-    def __init__(self, file):
-        self.eyes = Image.open(file)   # eye image
+    def __init__(self, folder_path):
+        
+        self.eyes = Image.open(folder_path+"pupil.png")   # eye image
         self.positionX = 0  # keeps the x position as a coordinate
         self.positionY = 0  # keeps the y position as a coordinate
 

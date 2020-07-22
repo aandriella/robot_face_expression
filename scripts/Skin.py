@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 """
-@Author: Bilgehan NAL
+@Author: Antonio Andriella
 This file has a class which defines the skin of the baxter's face.
+Credits to Bilgehan NAL
 """
 
 from PIL import Image
@@ -10,19 +11,13 @@ import rospy
 
 class Skin:
     
-    indexOfSkin = 5 # choosen element of the array
+    indexOfSkin = 1 # choosen element of the array
 
-    def __init__(self, initSkin):
+    def __init__(self, folder_path, initSkin):
 
         # This array keeps the diffirent colour version of skin
         self.skins = [
-            Image.open("test/skin.png"),
-            Image.open("test/skin.png"),
-            Image.open("test/skin.png"),
-            Image.open("test/skin.png"),
-            Image.open("test/skin.png"),
-            Image.open("test/skin.png")
-
+            Image.open(folder_path+"skin.png")
         ]
 
 
