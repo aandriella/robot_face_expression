@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 """
-@Author: Bilgehan NAL
-This file has a class which defines the mouth of the baxter's face.
+@Author: Antonio Andriella
+This file has a class which defines the mouth of the Tiago's face.
+In the current version we decided to not use it
+Credits to Bilgehan NAL
 """
 
 from PIL import Image
