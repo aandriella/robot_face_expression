@@ -9,7 +9,6 @@ project(robot_facial_expression)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   actionlib
-  baxter_core_msgs
   control_msgs
   dynamic_reconfigure
   rospy
