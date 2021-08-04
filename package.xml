@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>robot_facial_expression</name>
+  <name>robot_face_expression</name>
   <version>0.0.0</version>
   <description>Edited version of the baxter_face package</description>
 
