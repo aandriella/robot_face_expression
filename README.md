@@ -1,4 +1,4 @@
-# Repo used to generate TIAGo Facial expressions
+### TIAGo Facial expressions generator
 
 #### Most of the code is taken from the great work of [Bilgehan NAL](https://github.com/bilgehannal/baxter_face_software)  on the Baxter robot #### 
 
@@ -10,8 +10,9 @@
 - **script** folder contains the code to build the face. Most of the code has been got from the work of Bilgehan NAL and just a few things have been edited or removed in order to get it working with the TIAGo.
 
 
+## USAGE ###
 
-How to run it:
+Launch the ROS node:
 
 ``` 
  roslaunch robot_face_expression robot_face_expression.launch 
