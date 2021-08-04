@@ -3,7 +3,7 @@
 '''
 @Author: Antonio Andriella
 This file has a class which defines the shape and movement of the Tiago's eyes.
-Credits to Bilgehan NAL
+Credits to Bilgehan NAL for creating the whole package for the Baxter robot
 '''
 
 from PIL import Image
@@ -64,7 +64,7 @@ class Eye:
             return math.atan(float(y)/float(x+0.00001))
 
     '''This function returns the result of ellipse formula according to x and y positions.
-    If the result between [0, 1]. Eyes are in the eyes space'''
+    If the result between [0, 1a]. Eyes are in the eyes space'''
     
     def dotPosition(self, x, y):
         radiusX = 80

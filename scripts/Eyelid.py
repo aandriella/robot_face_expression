@@ -3,7 +3,7 @@
 '''
 @Author: Antonio Andriella
 This file has class which defines the eyelid of the Tiago robot
-Credits to Bilgehan NAL
+Credits to Bilgehan NAL for creating the whole package for the Baxter robot
 '''
 
 from PIL import Image

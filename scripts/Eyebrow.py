@@ -3,7 +3,7 @@
 """
 @Author: Antonio Andriella
 This file has a class which defines the eyebrow of the Tiago's face.
-Credits to Bilgehan NAL
+Credits to Bilgehan NAL for creating the whole package for the Baxter robot
 """
 
 from PIL import Image

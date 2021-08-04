@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 '''
-@Author: Bilgehan NAL
+@Author: @Author: Antonio Andriella
 This file is a subscriber node which listens a topic type:String
 Waited String messages:
 Emotions:
@@ -21,8 +21,7 @@ Other:
     -> "exit"
     -> "wake_up"
     -> "sleep"
-
-
+Credits to Bilgehan NAL for creating the whole package for the Baxter robot
 '''
 
 import os

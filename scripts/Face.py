@@ -4,26 +4,26 @@
 @Author: Antonio Andriella
 This file has a class which defines the face of Tiago
 Face class has other part of the face objects.
-Credits to Bilgehan NAL
+Credits to Bilgehan NAL for creating the whole package for the Baxter robot
 '''
 
 '''
 Tiago Face Descriptions:
 
 Skin, Mouth and Eyebrow has multiple shapes.
-Skin has 1 -> [0] (So far we are not interested to change the skin color of the robot)
+Skin has 1a -> [0] (So far we are not interested to change the skin color of the robot)
 Mouth has 7 -> [0, 6] (Not used it in the current version)
 Eyebrow has 5 -> [0, 4] (neutral, happy, sad, confused, angry)
 
 Mouth ::
     0 -> neutral mouth
-    1 -> happy mouth
+    1a -> happy mouth
     2 -> sad mouth
     3 -> confused mouth
     4 -> angry mouth
 Eyebrow ::
     0 -> neutral mouth
-    1 -> happy mouth
+    1a -> happy mouth
     2 -> sad mouth
     3 -> confused mouth
     4 -> angry mouth

@@ -4,7 +4,7 @@
 @Author: Antonio Andriella
 This file has a class which defines the mouth of the Tiago's face.
 In the current version we decided to not use it
-Credits to Bilgehan NAL
+Credits to Bilgehan NAL for creating the whole package for the Baxter robot
 """
 
 from PIL import Image
