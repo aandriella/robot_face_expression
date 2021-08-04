@@ -3,14 +3,8 @@
   
 
   <!-- Start screen_listener node -->
-  <node name="rsdk_xdisplay_image" pkg="robot_facial_expression" type="screen_listener.py" />
+  <node name="rsdk_xdisplay_image" pkg="robot_face_expression" type="screen_listener.py" />
 
-
-   <arg name="gender" default="female" />
-      <param name="/gender" value="$(arg gender)" />
-
-  <!-- Start control_physical node 
-  <node name="control" pkg="robot_facial_expression" type="control_physical.py" />
--->
+ 
 
 </launch>
