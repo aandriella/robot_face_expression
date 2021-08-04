@@ -1,6 +1,6 @@
 # Repo used to generate TIAGo Facial expressions
 
-#### Most of the code is taken from the great work of [Bilgehan NAL](git@github.com:bilgehannal/baxter_face_software.git)  on the Baxter robot #### 
+#### Most of the code is taken from the great work of [Bilgehan NAL](https://github.com/bilgehannal/baxter_face_software)  on the Baxter robot #### 
 
 
 
@@ -17,9 +17,8 @@ How to run it:
  roslaunch robot_face_expression robot_face_expression.launch 
 ```
 
-To visualise the different facial expressions you have to run the [robot_face_visualizer](git@github.com:aandriella/robot_face_visualizer.git) node as follows:
+To visualise the different facial expressions you have to run the [robot_face_visualizer](https://github.com/aandriella/robot_face_visualizer) node as follows:
 
 ``` 
  rosrun robot_face_visualizer face_visualizer.py
 ```
-
