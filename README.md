@@ -1,7 +1,6 @@
 # Repo used to generate TIAGo Facial expressions
 
-#### "Most of the code is taken from the great work of  [Bilgehan NAL](git@github.com:bilgehannal/baxter_face_software.git)  on the Baxter robot" 
-#### 
+#### Most of the code is taken from the great work of [Bilgehan NAL](git@github.com:bilgehannal/baxter_face_software.git)  on the Baxter robot #### 
 
 
 
