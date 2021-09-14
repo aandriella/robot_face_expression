@@ -57,7 +57,7 @@ class Face:
         self.robot_gender = rospy.get_param("/gender")
 
         # determine the path and set the default path place
-        os.chdir(r'/home/{}/pal/cognitive_game_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
+        os.chdir(r'/home/pal/carf_ws/src/robot_facial_expression/scripts'.format(getpass.getuser()))
         ''' Parts of the face of baxter are defined.'''
         self.backgroundImage = Image.open("data/"+self.robot_gender+"/baxter_background.png") # Background behind the eyes
         # Face partions objects
@@ -199,6 +199,7 @@ class Face:
         self.show(publish)
 
     def sleep(self, cv2, publish):
+       print("sleep")
        self.winkMove(cv2, 0, 0.6, publish) # Eyelids are not seen.
        self.skin.setSkin(5) # range: [0, 5]
        self.showEmotion(1, 1, cv2, publish)
@@ -209,11 +210,14 @@ class Face:
         self.showEmotion(5, 0, cv2, publish)
 
     def emotion_default(self, cv2, publish):
+       print("default")
        self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
        self.skin.setSkin(2)
-       self.showEmotion(5, 0, cv2, publish)
+       self.showEmotion(1, 2, cv2, publish)
     
     def emotion_happy(self, cv2, publish):
+        print("happy")
+
         mouthArray = [4, 6]
         eyeBrowArray = [0, 1]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
@@ -223,14 +227,17 @@ class Face:
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_neutral(self, cv2, publish):
+        print("Neutral emotion")
         eyeBrowArray = [0, 1]
         self.winkMove(cv2, -330, 0.3, publish)  # Eyelids are not seen.
         self.skin.setSkin(2)
         mouthIndex = 5  # random.choice(mouthArray)
-        eyebrowIndex = random.choice(eyeBrowArray)
+        eyebrowIndex = 3#random.choice(eyeBrowArray)
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_angry(self, cv2, publish):
+        print("angry")
+
         mouthArray = [0, 3]
         eyeBrowArray = [2, 3]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
@@ -240,6 +247,7 @@ class Face:
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_confused(self, cv2, publish):
+        print("confused")
         mouthArray = [2]
         eyeBrowArray = [0, 1]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
@@ -249,6 +257,7 @@ class Face:
         self.showEmotion(mouthIndex, eyebrowIndex, cv2, publish)
 
     def emotion_sad(self, cv2, publish):
+        print("sad")
         mouthArray = [1, 3]
         eyeBrowArray = [4]
         self.winkMove(cv2, -330, 0.3, publish) # Eyelids are not seen.
